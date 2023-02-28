@@ -1,0 +1,324 @@
+# 可扩展的元语法
+
+- `<` 后面的第一个字符是空白符
+
+.leading whitespace quotes words (space)
+[source,raku]
+----
+'aaaaa' ~~ /< a aa aaaa >/;
+----
+
+.leading whitespace quotes words (tab)
+[source,raku]
+----
+'aaaaa' ~~ /<   a aa aaaa >/;
+----
+
+.<...> without whitespace calls a method (not quote words)
+[source,raku]
+----
+'aaaa' ~~ /<a aa>/;
+----
+
+`<nemed_regex>` 实际上会调用名为 **named_regex** 的方法。如果没有定义 `regex named_regex { ... }` 就会报找不到方法:
+
+[source,txt]
+----
+No such method 'named_regex' for invocant of type 'Match'
+----
+
+.degenerate case of quote list
+[source,raku]
+----
+'hello' ~~ /< hello >/;
+----
+
+
+- A leading alphabetic character means it's a capturing grammatical assertion
+
+.capturing grammatical assertion
+[source,raku]
+----
+'moose' ~~ /<alpha>/;
+'1a2b3c' ~~ /<alpha>/;
+----
+
+.call regex with dash
+
+[source,raku]
+----
+my regex with-dash { '-' }
+
+'-'  ~~ /<with-dash>/;
+'|' !~~ /<with-dash>/;
+----
+
+.call regex with hyphen
+[source,raku]
+----
+my regex with'hyphen { a }
+
+'a'  ~~ /<with'hyphen>/;
+'b' !~~ /<with'hyphen>/;
+----
+
+- 标识符后面的第一个字符是一个等号: `=`
+
+> If the first character after the **identifier** is an `=`, then the **identifier** is taken as an alias for what follows
+
+.basic <foo=bar> aliasing
+[source,raku]
+----
+'foo' ~~ /<foo=alpha>/;
+say ~$<foo>;   # f
+say ~$<alpha>; # f
+----
+
+.dot alias does throw away original name
+[source,raku]
+----
+'foo' ~~ /<foo=.alpha>/;
+say ~$<foo>; # f
+
+if defined($<alpha>) { ... }
+----
+
+.character class aliasing
+[source,raku]
+----
+'foobar' ~~ / <foo=[bao]>+ /;
+----
+
+字符类别名, 捕获的名为 foo, 由于量词 `+` 的修饰, `foo` 出现了多次:
+
+[source,txt]
+----
+｢ooba｣
+ foo => ｢o｣
+ foo => ｢o｣
+ foo => ｢b｣
+ foo => ｢a｣
+----
+
+.negative character class aliasing
+[source,raku]
+----
+'fdoobar' ~~ / <bar=-[bao]>+ /;
+----
+
+Unicode 属性别名:
+
+.UniProp aliasing
+[source,raku]
+----
+'a.' ~~ / <foo=:Letter> /;
+----
+
+
+.negative UniProp aliasing
+[source,raku]
+----
+'a.' ~~ /<bar=:!Letter>/;
+----
+
+
+- 第一个标识符后面不允许跟其他字符串
+
+.No other characters are allowed after the initial identifier
+[source,raku]
+----
+'foo' ~~ /<test*>/;
+'foo' ~~ /<test|>/;
+'foo' ~~ /<test&>/;
+'foo' ~~ /<test:>/;
+----
+
+.explicitly calls a method as a subrule
+[source,raku]
+----
+'blorg' ~~ /<.alpha>/;
+----
+
+leading . prevents capturing.
+
+
+- A leading $ 
+
+> A leading $ indicates an indirect subrule. 
+The variable must contain either a Regex object, or a string to be compiled as the regex.
+
+
+.<$whatever> subrule
+[source,raku]
+----
+my $rule = rx/bar/;
+my $str = 'qwe';
+
+'bar'  ~~ /<$rule>/;
+'qwer' ~~ /<$str>/;
+
+'abar' ~~ /a<$rule>/;
+'qwer' ~~ /<$str>r/;
+----
+
+.A leading :: indicates a symbolic indirect subrule
+[source,raku]
+----
+my $name = 'alpha';
+'..abcdef--' ~~ /<::($name)>+/;
+# Output: ｢abcdef｣
+----
+
+- A leading @
+
+> A leading @ matches like a bare array except that each element is 
+treated as a subrule (string or Regex object) rather than as a literal
+
+.strings are treated as a subrule in <@first>
+[source,raku]
+----
+my @first = <a b c .**4>;
+'dddd' ~~ /<@first>/;
+----
+
+.Regexes are left alone in <@second> subrule
+[source,raku]
+----
+my @second = rx/\.**2/, rx/'.**2'/;
+
+'abc.**2def' ~~ /<@second>/; # ｢.**2｣
+----
+
+
+- A leading {
+
+> A leading { indicates code that produces a regex to be
+interpolated into the pattern at that point as a subrule
+
+.code interpolation
+[source,raku]
+----
+'abcdef' ~~ /<{'<al' ~ 'pha>'}>/
+----
+
+
+
+
+- A leading `?{` or `!{`
+
+> A leading ?{ or !{ indicates a code assertion
+
+.code assertion
+[source,raku]
+----
+'192' ~~ /(\d**3) <?{$0 < 256}>/
+'992' ~~ /(\d**3) <!{$0 < 256}>/
+----
+
+- A leading `[` / `-` / `+` / `!`
+
+
+.A leading `[` indicates an enumerated character class
+[source,raku]
+----
+'zyxaxyz' ~~ m/<[aeiou]>/;
+----
+
+.A leading `-` indicates a complemented character class
+[source,raku]
+----
+'f' ~~ m/<-[aeiou]>/;
+----
+
+
+.A leading `+` may also be supplied
+[source,raku]
+----
+'u' ~~ m/<+[aeiou]>/;
+----
+
+.A leading ! indicates a negated meaning (always a zero-width assertion)
+[source,raku]
+----
+"a" ~~ m/<![a]>/;
+'1./:"{}=-' ~~ /^[<!alpha> .]+$/;
+'abcdef' ~~ /<!alpha>./;
+'.2 1' ~~ /<!before 2> \d/;
+----
+
+.A leading ? indicates a positive zero-width assertion
+[source,raku]
+----
+'123abc456def' ~~ /.+? <?alpha>/;
+----
+
+
+
+- A leading `~~`
+
+> A leading ~~ indicates a recursive call back into some or all of the
+ current rule. An optional argument indicates which subpattern to re-use
+
+
+[source,raku]
+----
+'1.2.' ~~ /\d+\. <~~> | <?>/;
+----
+
+注意这里的 `<?>` 有特殊的用途, 它匹配空字符串。如果把它去掉, 上面的匹配就失败了。
+
+
+- `<(` indicates the start of a result capture
+
+[source,raku]
+----
+'foo123bar' ~~ /foo <(\d+)> bar/;
+'foo456bar' ~~ /foo <(\d+ bar/;
+
+# <( in backtracking
+'foo123bar' ~~ /foo <( bar || ....../
+----
+
+
+- `)>` indicates the endpoint of a result capture
+
+
+[source,raku]
+----
+'foo789bar' ~~ /foo \d+)> bar/;
+----
+
+
+- `comb` combined with `<(...)>`
+
+[source,raku]
+----
+'abc def abc'.comb(/a<(bc)>/);
+----
+
+
+- `match` combined with `<(...)>`
+
+[source,raku]
+----
+'abc'.match(/a<(bc)>/, :as(Str));
+----
+
+- word boundary
+
+> A « or << token indicates a left word boundary.
+ A » or >> token indicates a right word boundary.
+
+下面的正则都匹配 `abc`:
+
+[source,raku]
+----
+'abc' ~~ /<<abc/;
+'abc aa' ~~ /<<abc/;
+'!abc' ~~ /<<abc/;
+'abc' ~~ /abc>>/;
+'abc!' ~~ /abc>>/;
+'!abc!' ~~ /<<abc>>/;
+----
+
+

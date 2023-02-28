@@ -1,0 +1,92 @@
+=== 零宽断言
+
+|===
+| <same>  | 在两个相同字符之间匹配
+| <!same> | 在两个不同字符之间匹配
+|===
+
+使用零宽断言可以实现你自己的锚点。零宽断言把另一个正则表达式转换为锚点, 这个正则表达式不消耗输入字符串的字符。零宽断言有两个变体: 向前查看和向后查看。
+
+=== 向前查看
+
+- <?before pattern>
+
+即什么什么在 pattern 的前面。
+
+例如:
+
+[source,raku]
+----
+/ foo <?before bar> /
+----
+
+即 `foo` 在 `bar` 的前面。在字符串 `foobar` 中, 如果你问, foo 在 bar 的前面吗? 显而易见, 在:
+
+[source,raku]
+----
+say so "foobar" ~~ / foo <?before bar> /;  # OUTPUT: True
+----
+
+- <!before pattern>
+
+即什么什么不在 pattern 的前面。`!before` 即 not before 的意思。在字符串 `foobaz` 中, 如果你说, foo 不在 bar 的前面, 显而易见, 不在:
+
+[source,raku]
+----
+say so "foobaz" ~~ / foo <!before bar> /;  # OUTPUT: True
+----
+
+=== 向后查看
+
+- <?after pattern>
+
+pattern 后面是什么什么。在字符串 `foobar` 中, 如果你问, foo 后面是 bar 吗? 显而易见, 是的:
+
+[source,raku]
+----
+say so "foobar" ~~ / <?after foo> bar /;   # OUTPUT: True
+----
+
+- <!after pattern>
+
+在字符串 `fotbar` 中, 如果你要查看 bar, 但不在 foo 后面:
+
+[source,raku]
+----
+say so "fotbar" ~~ / <!after foo> bar /;   # OUTPUT: True 
+----
+
+=== <?>
+
+[source,raku]
+----
+say so "a" ~~ m/<?>/;    # True
+say so "ab" ~~ m{a<?>b}; # True
+----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
