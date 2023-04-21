@@ -1,0 +1,129 @@
+== 配置 PySpark
+
+- 安装依赖
+
+[source, shell]
+----
+yum install -y bzip2
+----
+
+- 安装 Anaconda
+
+下载 Anaconda3-5.2.0-Linux-x86_64.sh, 安装 Anaconda.
+安装到 /opt/anaconda3 目录下.
+
+- 配置 bashrc
+
+在 `.bashrc` 下添加如下配置:  
+
+[source, shell]
+----
+export SPARK_HOME="/opt/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/spark"
+
+# added by Anaconda3 installer
+export PATH="/opt/anaconda3/bin:$SPARK_HOME/bin:$PATH"
+export ANACONDA_HOME="/opt/anaconda3"
+export PYSPARK_PYTHON="$ANACONDA_HOME/bin/python3"
+----
+
+然后执行:
+
+[source, shell]
+----
+source ~/.bashrc
+----
+
+- 测试 pyspark shell
+
+[source, shell]
+----
+pyspark
+----
+
+- 用代码测试
+
+1) 写一个 Spark Structured Streaming 的 pyspark 程序
+2) 写一个离线的 pyspark 程序
+
+生产环境也按上述步骤进行配置.
+
+- 提交任务
+
+[source, raku]
+----
+spark-submit \
+  --deploy-mode cluster \
+  --master yarn \
+  --driver-memory 1g \
+  --executor-memory 2g \
+  --executor-cores 2 \
+  --num-executors 1 \
+  --conf spark.yarn.submit.waitAppCompletion=false \
+  test.py
+----
+
+如果测试集群资源较少, 参数设置需要调整一下, 否则会报资源不足的日志.
+
+
+PySpark:
+java.lang.OutOfMemoryError: Java heap space
+
+2020-12-09 13:34:20 ERROR StreamMetadata:94 - Error writing stream metadata StreamMetadata(9d80b854-9c2a-4da6-a819-cfebb24de9b3) to hdfs://host1:8020/mnt/data1/yarn/nm/usercache/root/appcache/application_1606980460131_0023/container_1606980460131_0023_01_000001/tmp/temporary-54f86f2e-e42d-423e-af9a-bdb45e7d055a/metadata
+org.apache.hadoop.security.AccessControlException: Permission denied: user=root, access=WRITE, inode="/":hdfs:supergroup:drwxr-xr-x
+
+使用命令 sudo -su hdfs 切换到 hdfs 帐号, 在 `~/.bashrc` 中添加如下配置:
+
+[source, bash]
+----
+export HADOOP_CONF_DIR=/etc/hadoop/conf
+export SPARK_HOME="/opt/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/spark"
+
+# added by Anaconda3 installer
+export PATH="/opt/anaconda3/bin:$SPARK_HOME/bin:$PATH"
+export ANACONDA_HOME="/opt/anaconda3"
+export PYSPARK_PYTHON="$ANACONDA_HOME/bin/python3"
+----
+
+在 hdfs 帐号下提交 pyspark 任务:
+
+[source, shell]
+----
+#!/bin/sh
+
+spark-submit \
+  --master yarn \
+  --deploy-mode cluster \
+  --driver-memory 1g \
+  --driver-cores 1 \
+  --executor-memory 1g \
+  --executor-cores 2 \
+  --num-executors 1 \
+  --conf spark.yarn.maxAppAttempts=3 \
+  --conf spark.yarn.submit.waitAppCompletion=false \
+  --conf spark.blacklist.timeout=30s \
+  --conf spark.sql.shuffle.partitions=6 \
+  hdfs://172.19.85.117:8020/apps/read_stream_kafka.py
+----
+
+
+ImportError: pyarrow requires pandas 0.23.0 or above, pandas 0.20.3 is installed
+
+[source, bash]
+----
+pip uninstall pandas
+pip install pandas
+----
+
+[source, txt]
+----
+java.lang.IllegalArgumentException
+        at java.nio.ByteBuffer.allocate(ByteBuffer.java:334)
+----
+
+这个问题参考 link:https://stackoverflow.com/questions/58273063/pandasudf-and-pyarrow-0-15-0[pandasudf-and-pyarrow-0-15-0]
+
+
+[source, shell]
+----
+ARROW_PRE_0_15_IPC_FORMAT=1 spark-submit grouped_map_udfs.py
+----
