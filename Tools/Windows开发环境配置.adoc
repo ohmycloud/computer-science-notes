@@ -1,0 +1,190 @@
+= 配置 Windows
+
+== 安装 Windows 包管理工具
+
+Windows 下有多个包管理工具, 比较著名的有 link:https://scoop.sh/[scoop] 和 link:https://docs.chocolatey.org[chocolatey]。
+
+link:https://scoop.sh/[Scoop] 是 Windows 平台的一款命令行安装工具。安装方式如下:
+
+[source,shell]
+.打开 PowerShell 终端(5.1 版本或更高版本), 输入如下命令
+----
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+Invoke-WebRequest get.scoop.sh | Invoke-Expression
+----
+
+安装成功后, 你可以使用 `scoop` 命令安装软件:
+
+[source,shell]
+.以下安装包是可选的, 可根据需要进行安装
+----
+# install software with GUI
+scoop install powertoys
+scoop install firefox
+scoop install googlechrome
+scoop install vscode
+
+# install commandline tools
+scoop install sudo
+scoop install touch
+scoop install everything-cli
+scoop install sed
+scoop install gawk
+scoop install wget
+scoop install grep
+scoop install broot
+scoop install starship
+scoop install fd
+scoop install bat
+scoop install less
+scoop install sd
+scoop install dust
+scoop install ripgrep
+scoop install tokei
+scoop install tealdeer
+scoop install zoxide
+scoop install miniserve
+scoop install fastcopy
+scoop install termscp
+scoop install 7zip
+scoop install ack
+scoop install croc
+scoop install jq
+scoop install time
+scoop install unrar
+
+# install programming language
+scoop install rust
+scoop install python
+scoop install scala
+scoop install ruby
+scoop install go
+scoop install perl
+scoop install nim
+scoop install elixir
+scoop install julia
+scoop install zig
+
+# install apache software
+scoop install spark
+scoop install mysql
+----
+
+如果安装过程需要系统管理员权限, 在 scoop 命令前加上 **sudo**。
+
+[source,shell]
+----
+sudo scoop install nodejs
+----
+
+使用 search 命令搜索安装包:
+
+[source,shell]
+----
+scoop search mongo
+----
+
+link:https://docs.chocolatey.org[chocolatey] 是 Windows 下的另外一个包安装工具, 使用管理员权限进行安装:
+
+[source,shell]
+.打开 PowerShell 终端, 输入如下命令
+----
+Set-ExecutionPolicy Bypass -Scope Process -Force
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+----
+
+安装成功后, 使用 `choco` 命令安装软件:
+
+[source,shell]
+----
+choco install python -y
+choco install nushell
+----
+
+使用 `search` 命令搜索软件:
+
+[source,shell]
+----
+choco search rakudostar
+----
+
+== 配置 SSH Config
+
+编辑 `.ssh` 目录下的 config 文件, 增加 Host 配置:
+
+[source,txt]
+----
+# jump host
+Host dev01
+HostName 10.0.0.100
+Port 22
+User root
+
+# dev02
+Host dev02
+HostName 10.0.0.101
+User root
+ProxyCommand ssh.exe -W %h:%p dev01
+
+# gitlab
+Host mygitlab
+HostName gitlab.com
+User ohmycloud
+IdentityFile ~/.ssh/id_rsa
+----
+
+== 配置 Windows 终端
+
+打开 Windows 终端, 同时按住 `Ctrl + ,` 进入设置页面, 打开左下角的【打开 JSON 文件】, 找到 **profiles** 这一项(没有的化就新建一个), 在 **list** 数组里面, 添加每个 ssh 连接的配置:
+
+
+[source,json]
+----
+{
+    "$help": "https://aka.ms/terminal-documentation",
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "actions": [],
+    "copyFormatting": "none",
+    "copyOnSelect": true,
+    "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+    "initialRows": 45,
+    "profiles": 
+    {
+        "defaults": {},
+        "list": 
+        [
+            {
+                "background": "#013456",
+                "backgroundImage": "ms-appdata:///roaming/goose.png",
+                "backgroundImageOpacity": 0.20999999999999999,
+                "backgroundImageStretchMode": "uniformToFill",
+                "commandline": "powershell.exe ssh root@your_private_host",
+                "cursorShape": "bar",
+                "guid": "{89d35e92-abe2-4d14-8ffc-9eeaf116ffdd}",
+                "hidden": false,
+                "icon": "myico.ico",
+                "name": "my-dev-host",
+                "opacity": 92,
+                "useAcrylic": true
+            },
+        ]
+    }  
+}
+----
+
+其中几个键的说明如下:
+
+|===
+| 键                          | 说明
+| background                  | 终端的背景色
+| backgroundImage             | 终端的背景图片
+| backgroundImageOpacity      | 背景图片的透明度
+| backgroundImageStretchMode  | 背景图片的拉伸模式
+| commandline                 | 启动终端时执行的命令
+| cursorShape                 | 光标的形状
+| guid                        | 全局唯一标识符, 可使用 New-Guid 命令生成
+| icon                        | 图标 
+| name                        | 终端用来展示的名字 
+| opacity                     | 终端的透明度
+|===
