@@ -7,9 +7,24 @@ fn odd(start: u32, stop: u32) -> Odd {
 }
 ```
 
+`impl Trait` provides ways to specify unnamed but concrete types that implement a specific trait.It
+can appear in two sorts of places: argument position(where it can act as an anonymous type parameter to functions), and
+return position(where it can act as an abstract return type).
+
+```rs
+trait Trait {}
+
+// argument position: anonymous type parameter
+fn foo(arg: impl Trait) {} 
+
+// return position: abstract return type
+fn bar() -> impl Trait {}
+```
+
 == `impl Trait` in return types
 
 ```rs
+// return position: abstract return type
 fn odd(start: u32, stop: u32) -> impl Iterator<Item = u32> {
     (start ..= stop).filter(|i| i % 2 != 0)
 }
@@ -21,6 +36,7 @@ When you use an `impl Trait` in the type of a function argument, that is general
 the function. So this function:
 
 ```rs
+// argument position: anonymous type parameter
 fn sum(nums: impl Iterator<Item = u32>) -> u32 {
     nums.sum()
 }
