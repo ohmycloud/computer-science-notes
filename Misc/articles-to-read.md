@@ -1,2 +1,3 @@
+- https://soundness.dev/
 - https://xebia.com/blog/why-learn-contextual-abstractions-in-scala-3-first
 - https://udlbook.github.io/udlbook
