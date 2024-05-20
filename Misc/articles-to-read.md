@@ -3,3 +3,4 @@
 - https://xebia.com/blog/why-learn-contextual-abstractions-in-scala-3-first
 - https://udlbook.github.io/udlbook
 - https://medium.com/scala-3/scala-3-what-is-direct-style-d9c1bcb1f810
+- https://getkyo.io
