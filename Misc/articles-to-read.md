@@ -4,4 +4,3 @@
 - https://udlbook.github.io/udlbook
 - https://medium.com/scala-3/scala-3-what-is-direct-style-d9c1bcb1f810
 - https://getkyo.io
-- https://news.ycombinator.com/item?id=40156508
