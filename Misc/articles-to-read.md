@@ -5,3 +5,5 @@
 - https://medium.com/scala-3/scala-3-what-is-direct-style-d9c1bcb1f810
 - https://getkyo.io
 - https://pola.rs
+- https://opendal.apache.org
+- https://duckdb.org
