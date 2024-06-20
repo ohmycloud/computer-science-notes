@@ -7,3 +7,5 @@
 - https://pola.rs
 - https://opendal.apache.org
 - https://duckdb.org
+- https://www.openmymind.net
+- https://matklad.github.io
