@@ -9,3 +9,5 @@
 - https://duckdb.org
 - https://www.openmymind.net
 - https://matklad.github.io
+- https://nixos.org
+- https://ziglang.org
