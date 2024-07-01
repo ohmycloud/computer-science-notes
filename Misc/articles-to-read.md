@@ -12,3 +12,4 @@
 - https://nixos.org
 - https://ziglang.org
 - https://blog.davimiku.com/tutorials/json-parsing-rust-1
+- https://tokio.rs
