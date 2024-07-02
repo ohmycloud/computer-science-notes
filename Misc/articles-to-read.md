@@ -14,3 +14,4 @@
 - https://blog.davimiku.com/tutorials/json-parsing-rust-1
 - https://tokio.rs
 - https://github.com/cloudflare/pingora
+- https://pola.rs/posts/the-expressions-api-in-polars-is-amazing
