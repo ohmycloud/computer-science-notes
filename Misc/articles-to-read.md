@@ -16,3 +16,4 @@
 - https://github.com/cloudflare/pingora
 - https://pola.rs/posts/the-expressions-api-in-polars-is-amazing
 - https://course.rs
+- https://datafusion.apache.org
