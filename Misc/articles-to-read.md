@@ -17,3 +17,4 @@
 - https://pola.rs/posts/the-expressions-api-in-polars-is-amazing
 - https://course.rs
 - https://datafusion.apache.org
+- https://ibis-project.org/posts/1tbc
