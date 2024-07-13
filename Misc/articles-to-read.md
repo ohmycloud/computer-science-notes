@@ -18,3 +18,4 @@
 - https://course.rs
 - https://datafusion.apache.org
 - https://ibis-project.org/posts/1tbc
+- https://pureframes.eu/blog
