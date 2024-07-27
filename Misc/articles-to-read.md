@@ -20,3 +20,4 @@
 - https://ibis-project.org/posts/1tbc
 - https://pureframes.eu/blog
 - https://query.rs
+- https://docs.rs/winnow/latest/winnow
