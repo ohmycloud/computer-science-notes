@@ -23,3 +23,4 @@
 - https://docs.rs/winnow/latest/winnow
 - https://pest.rs
 - https://crates.io/crates/cronframe
+- https://www.youtube.com/@rustchinaconf5807
