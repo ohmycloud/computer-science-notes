@@ -26,3 +26,4 @@
 - https://www.youtube.com/@rustchinaconf5807
 - https://github.com/pedropark99/zig-book
 - https://github.com/makepad/makepad
+- https://github.com/arch-il/rusty_notes
