@@ -28,3 +28,4 @@
 - https://github.com/makepad/makepad
 - https://github.com/arch-il/rusty_notes
 - https://gavinleroy.com/writings/i-heart-assoc-types.html
+- https://rustcc.cn
