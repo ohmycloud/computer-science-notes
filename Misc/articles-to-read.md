@@ -30,3 +30,4 @@
 - https://gavinleroy.com/writings/i-heart-assoc-types.html
 - https://rustcc.cn
 - https://emschwartz.me/async-rust-can-be-a-pleasure-to-work-with-without-send-sync-static
+- https://www.howtocodeit.com
