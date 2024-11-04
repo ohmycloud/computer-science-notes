@@ -31,3 +31,5 @@
 - https://rustcc.cn
 - https://emschwartz.me/async-rust-can-be-a-pleasure-to-work-with-without-send-sync-static
 - https://www.howtocodeit.com
+- https://akilmohideen.github.io/java-rust-bindings-manual/title.html
+- https://docs.astral.sh/uv
