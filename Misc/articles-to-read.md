@@ -34,3 +34,4 @@
 - https://akilmohideen.github.io/java-rust-bindings-manual/title.html
 - https://docs.astral.sh/uv
 - https://www.getzola.org
+- https://dev.to/alexmercedcoder/introduction-to-cargo-and-cargotoml-2l86
