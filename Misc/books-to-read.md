@@ -1,1 +1,2 @@
 - Idiomatic Rust Code like a Rustacean
+- DuckDB in Action
