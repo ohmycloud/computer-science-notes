@@ -36,3 +36,4 @@
 - https://www.getzola.org
 - https://dev.to/alexmercedcoder/introduction-to-cargo-and-cargotoml-2l86
 - https://github.com/gregorygaines/bitfields-rs
+- https://kerkour.com/rust-organize-errors-large-projects
