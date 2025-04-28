@@ -38,3 +38,4 @@
 - https://github.com/gregorygaines/bitfields-rs
 - https://kerkour.com/rust-organize-errors-large-projects
 - https://www.shuttle.dev/blog/2023/12/06/using-axum-rust
+- https://github.com/alexpusch/rust-magic-patterns
