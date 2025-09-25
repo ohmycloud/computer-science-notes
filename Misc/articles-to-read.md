@@ -1,3 +1,4 @@
+- https://github.com/pest-parser/pest/discussions/1122
 - https://soundness.dev
 - https://typelevel.org/cats-effect
 - https://xebia.com/blog/why-learn-contextual-abstractions-in-scala-3-first
