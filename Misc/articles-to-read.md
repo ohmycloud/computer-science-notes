@@ -1,3 +1,4 @@
+- https://www.deeplearning.ai/courses/agentic-ai
 - https://blog.0xshadow.dev
 - https://biriukov.dev/docs/async-rust-tokio-io/1-async-rust-with-tokio-io-streams-backpressure-concurrency-and-ergonomics
 - https://www.youtube.com/watch?v=aZ5sfhGmEVU
