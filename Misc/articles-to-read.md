@@ -1,3 +1,4 @@
+- https://itsfoxstudio.substack.com/p/iterators-dive-into-lazy-composable
 - https://salttiger.com
 - https://github.com/mosif16/Apple-Doc-Mcp
 - https://learn.deeplearning.ai/courses/agentic-ai
