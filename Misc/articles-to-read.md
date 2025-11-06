@@ -1,3 +1,4 @@
+- https://corrode.dev/blog/rust-option-handling-best-practices
 - https://corrode.dev/blog/defensive-programming
 - https://pranitha.dev/posts/neural-networks-with-candle
 - https://pdf2zh-next.com
