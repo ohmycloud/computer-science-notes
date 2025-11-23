@@ -1,3 +1,4 @@
+- https://smallcultfollowing.com/babysteps/blog/2025/11/21/move-expressions
 - https://corrode.dev/blog/rust-option-handling-best-practices
 - https://corrode.dev/blog/defensive-programming
 - https://pranitha.dev/posts/neural-networks-with-candle
