@@ -1,3 +1,4 @@
+- https://goyalpramod.github.io/blogs/Transformers_laid_out
 - https://www.tag1.com/white-paper/part1-tokenization-building-an-llm-from-scratch-in-rust
 - https://raku-advent.blog
 - https://smallcultfollowing.com/babysteps/blog/2025/11/21/move-expressions
