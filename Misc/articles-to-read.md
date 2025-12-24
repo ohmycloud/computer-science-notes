@@ -1,3 +1,4 @@
+- https://www.tag1.com/white-paper/part1-tokenization-building-an-llm-from-scratch-in-rust
 - https://goyalpramod.github.io/blogs/Transformers_laid_out
 - https://www.tag1.com/white-paper/part1-tokenization-building-an-llm-from-scratch-in-rust
 - https://raku-advent.blog
