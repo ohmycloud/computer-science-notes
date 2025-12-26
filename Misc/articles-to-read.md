@@ -1,3 +1,4 @@
+- https://github.com/xincmm/sageread
 - https://www.tag1.com/how-to/part2-tensor-operations-building-an-llm-from-scratch
 - https://goyalpramod.github.io/blogs/Transformers_laid_out
 - https://www.tag1.com/white-paper/part1-tokenization-building-an-llm-from-scratch-in-rust
