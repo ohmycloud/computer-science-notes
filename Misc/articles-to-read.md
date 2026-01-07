@@ -1,3 +1,4 @@
+- https://www.ventoy.net/cn/index.html
 - https://github.com/xincmm/sageread
 - https://www.tag1.com/how-to/part2-tensor-operations-building-an-llm-from-scratch
 - https://goyalpramod.github.io/blogs/Transformers_laid_out
