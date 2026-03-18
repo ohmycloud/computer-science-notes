@@ -1,3 +1,4 @@
+- https://makepad.rs
 - https://www.ssp.sh/brain/great-open-source-tools-in-rust
 - https://openclaw.ai
 - https://codepointer.substack.com/p/uv-oncemap-rust-pattern-for-running
