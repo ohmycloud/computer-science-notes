@@ -1,3 +1,4 @@
+- https://noos.blog/posts/uv-how-it-works-under-the-hood
 - https://makepad.rs
 - https://www.ssp.sh/brain/great-open-source-tools-in-rust
 - https://openclaw.ai
