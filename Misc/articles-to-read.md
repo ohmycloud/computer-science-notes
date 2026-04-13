@@ -1,3 +1,4 @@
+- https://pydevtools.com/handbook/tutorial/build-a-python-library-with-a-rust-extension
 - https://noos.blog/posts/uv-how-it-works-under-the-hood
 - https://makepad.rs
 - https://www.ssp.sh/brain/great-open-source-tools-in-rust
