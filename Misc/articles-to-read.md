@@ -1,3 +1,4 @@
+- https://mnt.io/articles/switching-higher-order-streams-to-first-order-streams
 - https://pydevtools.com/handbook/tutorial/build-a-python-library-with-a-rust-extension
 - https://noos.blog/posts/uv-how-it-works-under-the-hood
 - https://makepad.rs
