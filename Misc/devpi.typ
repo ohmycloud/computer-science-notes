@@ -1,4 +1,4 @@
-#import("circuedoc_template.typ"): conf
+#import("doc_template.typ"): conf
 
 #show link: underline
 
@@ -67,29 +67,29 @@ poetry build
 poetry publish
 ```
 
-== 方法三）使用 #link("https://rye-up.com/")[Rye] 新建项目
+== 方法三）使用 #link("https://docs.astral.sh/uv")[uv] 新建项目
 
 ```bash
 mkdir my-project && cd my-project
-rye init --name my_project
+uv init --name my_project
 ```
 
 添加依赖:
 
 ```bash
-rye add polars==0.18.15
+uv add polars==0.18.15
 ```
 
 构建：
 
 ```bash
-rye build
+uv build
 ```
 
 发布：
 
 ```bash
-rye publish
+uv publish
 ```
 
 = 把 Python 包发布到私服
@@ -133,7 +133,7 @@ devpi upload --sdist .\dist\xxx-0.1.0-py3-none-any.whl
 twine upload .\dist\* -r devpi --verbose
 ```
 
-如果在配置中配置了仓库的名字, 那么在上传时使用 -r 仓库名 即可。 
+如果在配置中配置了仓库的名字, 那么在上传时使用 -r 仓库名 即可。
 
 == 配置 <config>
 
@@ -165,7 +165,7 @@ password: a_very_complex_password
 如果有多个索引服务, 就每行一个 index-server, 例如上面的配置中, 就使用了 pypi, nexus 和 devpi 三个索引服务。
 在每个索引服务的下面, 配置仓库地址, 用户名和密码。
 
-= 安装 Python 包 
+= 安装 Python 包
 
 上传完毕后, 使用者使用 pip 命令安装模块:
 

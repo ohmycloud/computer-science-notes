@@ -22,21 +22,21 @@
 
 #let conf(title: none, author: none, date: none, description: none, doc) = {
   set page(
-    footer: locate(loc => {
-      line(stroke: 1.2pt, length: 100%)
-      set align(right)
-      set text(font: "Cascadia Code PL", size: 12pt)
-      v(-0.6em)
-      [
-        共#h(1em)
-        #counter(page).final(loc).at(0)#h(1em)
-        页#h(1em)
-        第#h(1em)
-        #counter(page).display()
-        #h(1em)页
-      ]
-    })
-  )
+      footer: context {
+        line(stroke: 1.2pt, length: 100%)
+        set align(right)
+        set text(font: "Cascadia Code PL", size: 12pt)
+        v(-0.6em)
+        [
+          共#h(1em)
+          #counter(page).final().at(0)#h(1em)
+          页#h(1em)
+          第#h(1em)
+          #counter(page).display()
+          #h(1em)页
+        ]
+      }
+    )
 
   set heading(numbering: "1.")
 
